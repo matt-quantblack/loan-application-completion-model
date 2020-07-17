@@ -1,0 +1,8 @@
+.file-upload input {
+    display: none;
+}
+
+.file-upload p {
+    padding-left: 10px;
+    display: inline-block;
+}

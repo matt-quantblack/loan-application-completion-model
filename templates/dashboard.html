@@ -1,0 +1,98 @@
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/file_upload.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/csv_header_parser.css')}}">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="{{url_for('static', filename='js/file_upload.js')}}"></script>
+<script src="{{url_for('static', filename='js/csv_header_parser.js')}}"></script>
+<script src="{{url_for('static', filename='js/dashboard-events.js')}}"></script>
+
+<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+<head>
+</head>
+
+<body>
+    <div class="container p-5">
+        <div class="card">
+            <img class="p-5" src="{{url_for('static', filename='regional-australia-bank-logo.webp')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h3 class="card-title">Loan Approval - Customer Follow Up List</h3>
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <table class="form-table">
+                            <tr>
+                                <td>
+                                    Connect to Google Analytics
+                                </td>
+                                <td>
+                                    <div id="google-analytics-select" class="dropdown">
+                                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Do not connect
+                                          </button>
+                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#" value="0">Do not connect</a>
+                                                <a class="dropdown-item" href="#" value="1">All website traffic</a>
+                                                <a class="dropdown-item" href="#" value="2">External traffic</a>
+                                          </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Upload Customer Data
+                                </td>
+                                <td>
+                                    <div class="file-upload">
+                                        <button type="button" class="btn btn-secondary">
+                                              Browse
+                                        </button>
+                                        <input type="file" class="csv-parser">
+                                        <p>No file selected.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table class="table table-striped csv-parser">
+                            <thead>
+                                <th>Field Name</th>
+                                <th>Data Type</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>[[field_name]]</td>
+                                    <td>
+                                        <div class="dropdown">
+                                          <button class="btn btn-secondary btn-small dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select data type
+                                          </button>
+                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#" value="0">Exclude</a>
+                                                <a class="dropdown-item" href="#" value="1">Nominal</a>
+                                                <a class="dropdown-item" href="#" value="2">Ordinal</a>
+                                                <a class="dropdown-item" href="#" value="3">Continuous</a>
+                                                <a class="dropdown-item" href="#" value="4">Response Variable</a>
+                                          </div>
+                                    </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
