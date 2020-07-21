@@ -3,6 +3,15 @@
 from apiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 
+from ga_adapter import GAAdapter
+
+def test_something():
+    ga_adapter = GAAdapter()
+    ga_adapter.connect(scopes=['https://www.googleapis.com/auth/analytics.readonly'],
+                       key_file_location=r'D:\Downloads\google_analytics_cred.json')
+    profiles = ga_adapter.get_profiles()
+
+    print(profiles)
 
 def get_service(api_name, api_version, scopes, key_file_location):
     """Get a service that communicates to a Google API.
@@ -86,6 +95,9 @@ def print_results(results):
 
 
 def main():
+
+    test_something()
+    """
     # Define the auth scopes to request.
     scope = 'https://www.googleapis.com/auth/analytics.readonly'
     key_file_location = r'D:\Downloads\google_analytics_cred.json'
@@ -98,9 +110,9 @@ def main():
             key_file_location=key_file_location)
 
     profile_id = get_first_profile_id(service)
-    #print_results(get_results(service, profile_id))
-    print_results(get_realtime_results(service, profile_id))
-
+    print_results(get_results(service, profile_id))
+    #print_results(get_realtime_results(service, profile_id))
+    """
 
 if __name__ == '__main__':
     main()
