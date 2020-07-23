@@ -2,21 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36fc2856-9cc1-4cd3-bfcb-6c7037ab8a73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/application/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/file_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/ajax-loader.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/model_builder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/google_analytics/ga_adapter.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/ga_adapter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/csv_header_parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/csv_header_parser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/file_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/file_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_template.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_template.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/dashboard-events.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/dashboard-events.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/file_upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/file_upload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/logo_name.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/regional-australia-bank-logo.webp" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/regional-australia-bank-logo.webp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/upload_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/upload_utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +207,7 @@
       <option name="presentableId" value="Default" />
       <updated>1594877748246</updated>
       <workItem from="1594877773803" duration="15417000" />
-      <workItem from="1595290927842" duration="25469000" />
+      <workItem from="1595290927842" duration="36581000" />
     </task>
     <servers />
   </component>
@@ -238,42 +231,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="679" y="147" key="#test_api_(1)/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595306407870" />
-    <state width="546" height="466" key="DebuggerActiveHint" timestamp="1595306952050">
+    <state width="1201" height="466" key="DebuggerActiveHint" timestamp="1595475654197">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="546" height="466" key="DebuggerActiveHint/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595306952050" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1595463776490">
+    <state width="1201" height="466" key="DebuggerActiveHint/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595475654197" />
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1595483589253">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595463776490" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1595463776490">
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595483589253" />
+    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1595483589253">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595463776490" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1595463776490">
+    <state width="1877" height="348" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595483589253" />
+    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1595483589252">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595463776490" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1595463776490">
+    <state width="1877" height="348" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595483589252" />
+    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1595483589253">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595463776490" />
-    <state width="1877" height="364" key="GridCell.Tab.1.bottom" timestamp="1595331516087">
+    <state width="1877" height="348" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595483589253" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1595483589173">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="364" key="GridCell.Tab.1.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595331516087" />
-    <state width="1877" height="364" key="GridCell.Tab.1.center" timestamp="1595331516087">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595483589173" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1595483589173">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="364" key="GridCell.Tab.1.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595331516087" />
-    <state width="1877" height="364" key="GridCell.Tab.1.left" timestamp="1595331516087">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595483589173" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1595483589173">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="364" key="GridCell.Tab.1.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595331516087" />
-    <state width="1877" height="364" key="GridCell.Tab.1.right" timestamp="1595331516087">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595483589173" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1595483589173">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="364" key="GridCell.Tab.1.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595331516087" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595483589173" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1595475443334">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="968" height="528" key="XDebugger.FullValuePopup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595475443334" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -282,11 +279,6 @@
           <url>file://$PROJECT_DIR$/google_analytics/test.py</url>
           <line>88</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app.py</url>
-          <line>20</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/google_analytics/test.py</url>
@@ -308,16 +300,24 @@
           <line>24</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app.py</url>
-          <line>49</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="results.get('rows')" language="Python" />
+      </configuration>
+      <configuration name="Python.FlaskServer">
+        <watch expression="request.json" language="Python" />
+        <watch expression="request.form.getlist(&quot;data[]&quot;)" language="Python" />
+        <watch expression="request.form" language="Python" />
+        <watch expression="request.data.get(&quot;data&quot;)" language="Python" />
+        <watch expression="request.files" language="Python" />
+        <watch expression="request.files['file']" language="Python" />
+        <watch expression="request.form" language="Python" />
+        <watch expression="&quot;,&quot;.join(line)" language="Python" />
+        <watch expression="file.seek(0)" language="Python" />
+        <watch expression="file.readline()" language="Python" />
+        <watch expression="df.to_json(orient='records')" language="Python" />
       </configuration>
     </watches-manager>
   </component>
@@ -328,6 +328,6 @@
     <SUITE FILE_PATH="coverage/Vantage$test_api__1_.coverage" NAME="test_api (1) Coverage Results" MODIFIED="1595306999380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Vantage$tests_api.coverage" NAME="tests_api Coverage Results" MODIFIED="1595304908519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Vantage$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1595301306157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Vantage$Vantage.coverage" NAME="Vantage Coverage Results" MODIFIED="1595463776484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Vantage$Vantage.coverage" NAME="Vantage Coverage Results" MODIFIED="1595483589151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

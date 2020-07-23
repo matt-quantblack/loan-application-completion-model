@@ -2,6 +2,7 @@ function api_request_post(url, data, onsuccess)
 {
     $.ajax({
         url: url,
+        type: "POST",
         data: data,
         dataType: 'json',
         success: function (data) {
@@ -25,7 +26,7 @@ function set_credentials(e) {
     var button = $("#credential-btn");
     button.addClass('disabled');
 
-    var data = new FormData($('form').get(0));
+    var data = new FormData($("#cred-form").get(0));
     $("#cred-form .details").text("Uploading new credentials file");
     $("#cred-form .ajax-loader").show();
 
@@ -94,13 +95,7 @@ function check_credentials()
 
 function get_data_template(fields)
 {
-    var get_data = "?";
-
-    fields.forEach(function(val) {
-       get_data += "name=" + val + "&";
-    });
-
-    $.get("/api/v1/data_template/find" + get_data, function( data ) {
+    api_request_post("/api/v1/data_template/details", {'data': fields}, function( data ) {
 
         if(data.hasOwnProperty("success") && data["success"] == true)
         {
@@ -112,4 +107,69 @@ function get_data_template(fields)
         }
 
     });
+
+}
+
+//Phone,Contact Details
+
+function build_and_predict()
+{
+
+    //Gather field data types
+    let fields = [];
+    $(".data-member:visible").each(function() {
+       let field_name = $(this).text().trim();
+       let value = $(this).parent().find(".dropdown-toggle").text().trim();
+       fields.push([field_name, value]);
+    });
+
+    var data = new FormData();
+    data.append('connect_ga', 'Exclude');
+    data.append('fields', JSON.stringify(fields));
+    data.append('file', $('#csv-input')[0].files[0]);
+
+    $.ajax({
+        url: '/api/v1/model/build',
+        type: 'POST',
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function(data) {
+
+            let isFirst = true;
+            $("#results-table thead").empty();
+            $("#results-table tbody").empty();
+
+            data.forEach(function (obj) {
+                fields = Object.keys(obj);
+
+                if(isFirst)
+                {
+                    isFirst = false;
+                    let markup = "";
+                    fields.forEach(function(field) {
+                        markup += "<th>" + field + "</th>";
+                    });
+
+                    $("#results-table thead").append(markup);
+                }
+
+                let markup = "<tr>";
+                fields.forEach(function(field) {
+                    markup += "<td>" + obj[field] + "</td>";
+                });
+                markup += "</tr>";
+
+                $("#results-table tbody").append(markup);
+            });
+
+            $("#results-card").show();
+            $('html, body').animate({
+                    scrollTop: $("#results-card").offset().top
+                }, 2000);
+
+        }
+    });
+
 }

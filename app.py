@@ -1,9 +1,11 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, Response
 from application.ga_adapter import get_profiles
 from utils.upload_utils import validate_upload_file
 from flask import send_from_directory
 from application import file_manager
+from application import model_builder
 import os
+import json
 
 GA_CRED_PATH = 'google_analytics_cred.json'
 DATA_TEMPLATE_PATH = 'data_template.csv'
@@ -52,12 +54,14 @@ def api_all_profiles():
     return jsonify({'success': True, 'data': profiles})
 
 
-# A route to check local storage for data descriptors for the provided field names
-@app.route('/api/v1/data_template/find', methods=['GET'])
-def api_data_template_find():
+@app.route('/api/v1/data_template/details', methods=['POST'])
+def api_data_template_details():
+    """ A route to check local storage for data descriptors for the provided field names
+    used to pre fill the datatype for each field in the selected data csv on client side
+    """
 
     #extract the required field names from the get request - so we only send back details of these fields
-    field_names = request.args.getlist("name")
+    field_names = request.form.getlist("data[]")
 
     #get the field details from the data template
     rows = file_manager.csv_to_list(DATA_TEMPLATE_PATH)
@@ -70,6 +74,26 @@ def api_data_template_find():
         return jsonify({'success': True, 'data': details})
     else:
         return jsonify({'success': False})
+
+@app.route('/api/v1/model/build', methods=['POST'])
+def api_model_build():
+    """ The route to upload the csv data, build the ML models and return a priority list of customers
+    for follow up calls.
+    """
+
+    # Validate the file is acceptable
+    file, error = validate_upload_file(request.files, extensions=["csv"])
+
+    connect_ga = request.form.get("connect_ga")
+    fields_string = request.form.get("fields")
+    fields = json.loads(fields_string)
+
+    #get a dataframe of the contacts as a Pandas Dataframe
+    contacts = model_builder.build_and_predict(file, DATA_TEMPLATE_PATH, fields, connect_ga)
+
+    #jsonify the data from a Panads Dataframe
+    json_data = contacts.to_json(orient="records")
+    return Response(json_data, mimetype='application/json')
 
 
 if __name__ == '__main__':

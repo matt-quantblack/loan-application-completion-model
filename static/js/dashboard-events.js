@@ -15,6 +15,10 @@ data_file_changed = function() {
     $("#build-button").show();
 };
 
+build = function() {
+    build_and_predict();
+};
+
 $( document ).ready(function() {
 
     //Call the api to determine if Google Analytics credentials are active
@@ -28,4 +32,5 @@ $( document ).ready(function() {
 
     $("input.csv-parser").on("change", data_file_changed);
 
+    $("#build-button").on("click", build);
 });

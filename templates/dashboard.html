@@ -33,13 +33,15 @@
                                     Attach Customer Data
                                 </td>
                                 <td>
-                                    <div class="file-upload">
-                                        <button type="button" class="btn btn-secondary">
-                                              Browse
-                                        </button>
-                                        <input type="file" class="csv-parser">
-                                        <p>No file selected.</p>
-                                    </div>
+                                    <form id="data-form">
+                                        <div class="file-upload">
+                                            <button type="button" class="btn btn-secondary">
+                                                  Browse
+                                            </button>
+                                            <input id="csv-input" type="file" class="csv-parser" name="file">
+                                            <p>No file selected.</p>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                             <tr class="google-analytics checking">
@@ -116,5 +118,16 @@
 
             </div>
         </div>
+
+        <br/>
+         <div id="results-card" class="card" style="display: none">
+                <div class="card-body">
+                    <table id="results-table" class="table table-striped">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+         </div>
+
     </div>
 </body>
