@@ -89,3 +89,12 @@ class GAAdapter:
 
         # Return None if not successful
         return None
+
+
+def get_profiles(key_file_location):
+    ga_adapter = GAAdapter()
+    ga_adapter.connect(scopes=['https://www.googleapis.com/auth/analytics.readonly'],
+                       key_file_location=key_file_location)
+    profiles = ga_adapter.get_profiles()
+
+    return profiles

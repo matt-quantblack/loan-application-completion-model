@@ -1,0 +1,33 @@
+Number of Applicants,Numeric
+Debt Service Ratio,Percentage
+Gross Income,Money
+Total Debt to Gross Income Ratio,Percentage
+Total Commitments to Net Income Ratio,Percentage
+Primary Income Type,Value Set
+Employment Basis,Value Set
+Residential Status,Value Set
+Length of Time at Current Address,Numeric
+First Home Buyer,Yes/No
+Gender,Value Set
+Relationship Status,Value Set
+Number of Dependants,Numeric
+Dependant Minimum Age,Numeric
+Dependant Maximum Age,Numeric
+Total Asset Value,Money
+Residential Address Postcode,String
+Loan Product Type,Value Set
+Loan Amount,Money
+Loan Type,Value Set
+Repayment type (P&I IO),Value Set
+Veda Score,Numeric
+Number of Defaults,Numeric
+Default Amount,Money
+Security Type,Value Set
+Loan Valuation Ratio,Percentage
+Lenders Mortgage Insurance,Yes/No
+Guarantor,Yes/No
+Application Success Score,Response Variable
+First Name,Contact Details
+Last Name,Contact Details
+Email,Contact Details
+Phone,Contact Details

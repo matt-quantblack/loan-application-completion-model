@@ -11,6 +11,7 @@
 
 <script src="{{url_for('static', filename='js/file_upload.js')}}"></script>
 <script src="{{url_for('static', filename='js/csv_header_parser.js')}}"></script>
+<script src="{{url_for('static', filename='js/api.js')}}"></script>
 <script src="{{url_for('static', filename='js/dashboard-events.js')}}"></script>
 
 <meta name="viewport" content = "width=device-width, initial-scale=1.0">
@@ -20,34 +21,16 @@
 <body>
     <div class="container p-5">
         <div class="card">
-            <img class="p-5" src="{{url_for('static', filename='regional-australia-bank-logo.webp')}}" class="card-img-top" alt="...">
+            <img class="p-5" src="{{url_for('static', filename='images/regional-australia-bank-logo.webp')}}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h3 class="card-title">Loan Approval - Customer Follow Up List</h3>
 
                 <div class="card">
                     <div class="card-body">
-
-                        <table class="form-table">
+                        <table id="details-table" class="form-table">
                             <tr>
                                 <td>
-                                    Connect to Google Analytics
-                                </td>
-                                <td>
-                                    <div id="google-analytics-select" class="dropdown">
-                                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Do not connect
-                                          </button>
-                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#" value="0">Do not connect</a>
-                                                <a class="dropdown-item" href="#" value="1">All website traffic</a>
-                                                <a class="dropdown-item" href="#" value="2">External traffic</a>
-                                          </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Upload Customer Data
+                                    Attach Customer Data
                                 </td>
                                 <td>
                                     <div class="file-upload">
@@ -59,7 +42,43 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr class="google-analytics checking">
+                                <td>Checking Google Analytics Setup</td><td><img src="{{url_for('static', filename='images/ajax-loader.gif')}}"></td>
+                            </tr>
+                            <tr class="google-analytics getting" style="display:none">
+                                <td>Getting Google Analytics Profiles</td><td><img src="{{url_for('static', filename='images/ajax-loader.gif')}}"></td>
+                            </tr>
+                            <tr class="google-analytics not-configured" style="display:none">
+                                <td>Google Analytics</td>
+                                <td>
+                                    <form id="cred-form">
+                                        <div class="file-upload">
+                                            <button id="credential-btn" type="button" class="btn btn-warning">
+                                                  Attach Credentials
+                                            </button>
+                                            <input id="credential-upload" type="file" name="file">
+                                            <span class="details">(Optional)</span>
+                                            <img class="ajax-loader" src="{{url_for('static', filename='images/ajax-loader.gif')}}" style="display: none">
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr class="google-analytics connected" style="display:none">
+                                <td>
+                                    Connect to Google Analytics
+                                </td>
+                                <td>
+                                    <div id="google-analytics-select" class="dropdown">
+                                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              Please Select
+                                          </button>
+                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          </div>
+                                    </div>
+                                </td>
+                            </tr>
                         </table>
+                        <button id="build-button" class="btn btn-success btn-block" style="display: none">BUILD MODEL</button>
                         <br/>
                         <table class="table table-striped csv-parser">
                             <thead>
@@ -68,18 +87,21 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>[[field_name]]</td>
+                                    <td class="data-member">[[field_name]]</td>
                                     <td>
                                         <div class="dropdown">
                                           <button class="btn btn-secondary btn-small dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Select data type
                                           </button>
                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#" value="0">Exclude</a>
-                                                <a class="dropdown-item" href="#" value="1">Nominal</a>
-                                                <a class="dropdown-item" href="#" value="2">Ordinal</a>
-                                                <a class="dropdown-item" href="#" value="3">Continuous</a>
-                                                <a class="dropdown-item" href="#" value="4">Response Variable</a>
+                                                <a class="dropdown-item" href="#" value="-1">Exclude</a>
+                                                <a class="dropdown-item" href="#" value="0">Contact Details</a>
+                                                <a class="dropdown-item" href="#" value="1">Numeric</a>
+                                                <a class="dropdown-item" href="#" value="2">Percentage</a>
+                                                <a class="dropdown-item" href="#" value="3">Value Set</a>
+                                                <a class="dropdown-item" href="#" value="4">Yes/No</a>
+                                                <a class="dropdown-item" href="#" value="5">String</a>
+                                                <a class="dropdown-item" href="#" value="6">Response Variable</a>
                                           </div>
                                     </div>
                                     </td>

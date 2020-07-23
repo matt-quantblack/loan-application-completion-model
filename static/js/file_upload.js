@@ -2,7 +2,7 @@
 $( document ).ready(function() {
     $(".file-upload button").on("click", function(e) {
         e.preventDefault();
-        $(".file-upload input").trigger("click");
+        $(this).parent().find("input").trigger("click");
     });
 
      $(".file-upload input").on("change", function(e) {
