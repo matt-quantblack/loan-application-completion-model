@@ -50,6 +50,8 @@ def list_to_csv(data, filepath):
             wr.writerow(line)
 
 
+def remove_ga_credentials_file(filepath):
+    os.remove(filepath)
 
 def update_ga_credentials_file(file, filepath):
     file.save(filepath)

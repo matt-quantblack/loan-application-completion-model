@@ -9,10 +9,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+<script src="{{url_for('static', filename='js/jquery_download_post.js')}}"></script>
 <script src="{{url_for('static', filename='js/file_upload.js')}}"></script>
 <script src="{{url_for('static', filename='js/csv_header_parser.js')}}"></script>
+<script src="{{url_for('static', filename='js/api_helper.js')}}"></script>
 <script src="{{url_for('static', filename='js/api.js')}}"></script>
-<script src="{{url_for('static', filename='js/dashboard-events.js')}}"></script>
+<script src="{{url_for('static', filename='js/dashboard_functions.js')}}"></script>
+<script src="{{url_for('static', filename='js/dashboard_rendering.js')}}"></script>
+<script src="{{url_for('static', filename='js/dashboard_events.js')}}"></script>
+
 
 <meta name="viewport" content = "width=device-width, initial-scale=1.0">
 <head>
@@ -38,7 +43,7 @@
                                             <button type="button" class="btn btn-secondary">
                                                   Browse
                                             </button>
-                                            <input id="csv-input" type="file" class="csv-parser" name="file">
+                                            <input id="csv-input" type="file" class="csv-parser" name="file" accept=".csv">
                                             <p>No file selected.</p>
                                         </div>
                                     </form>
@@ -58,11 +63,15 @@
                                             <button id="credential-btn" type="button" class="btn btn-warning">
                                                   Attach Credentials
                                             </button>
-                                            <input id="credential-upload" type="file" name="file">
+                                            <input id="credential-upload" type="file" name="file" accept=".json">
                                             <span class="details">(Optional)</span>
                                             <img class="ajax-loader" src="{{url_for('static', filename='images/ajax-loader.gif')}}" style="display: none">
                                         </div>
                                     </form>
+                                </td>
+                                <td>
+                                    <a href id="cancel-change-cred" style="display: none">Cancel</a><br/>
+                                    <span id="cred-error" class="text-danger"></span>
                                 </td>
                             </tr>
                             <tr class="google-analytics connected" style="display:none">
@@ -71,16 +80,28 @@
                                 </td>
                                 <td>
                                     <div id="google-analytics-select" class="dropdown">
-                                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <button class="btn btn-secondary dropdown-toggle" value="-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               Please Select
                                           </button>
                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                           </div>
                                     </div>
+
+                                </td>
+                                <td>
+                                    <a href id="change-cred">Change Credentials</a><span> | </span><a href id="remove-cred">Remove Credentials</a> <img class="ajax-loader" src="{{url_for('static', filename='images/ajax-loader.gif')}}" style="display: none">
                                 </td>
                             </tr>
                         </table>
-                        <button id="build-button" class="btn btn-success btn-block" style="display: none">BUILD MODEL</button>
+                        <button id="build-button" class="btn btn-success btn-block" disabled>BUILD MODEL</button>
+                        <ul id="data-error" class="text-danger"></ul>
+                        <div id="build-model-loader" class="loading-div" style="display: none">
+                            <div class="card">
+                                <div class="card-body">
+                                    Generating Model <img class="ajax-loader" src="{{url_for('static', filename='images/ajax-loader.gif')}}">
+                                </div>
+                            </div>
+                        </div>
                         <br/>
                         <table class="table table-striped csv-parser">
                             <thead>
@@ -92,19 +113,20 @@
                                     <td class="data-member">[[field_name]]</td>
                                     <td>
                                         <div class="dropdown">
-                                          <button class="btn btn-secondary btn-small dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <button class="btn btn-secondary btn-small dropdown-toggle" value="-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Select data type
                                           </button>
                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#" value="-1">Exclude</a>
-                                                <a class="dropdown-item" href="#" value="0">Contact Details</a>
-                                                <a class="dropdown-item" href="#" value="1">Numeric</a>
-                                                <a class="dropdown-item" href="#" value="2">Percentage</a>
-                                                <a class="dropdown-item" href="#" value="3">Value Set</a>
-                                                <a class="dropdown-item" href="#" value="4">Yes/No</a>
-                                                <a class="dropdown-item" href="#" value="5">String</a>
-                                                <a class="dropdown-item" href="#" value="5">GA Merge Variable</a>
-                                                <a class="dropdown-item" href="#" value="6">Response Variable</a>
+                                                <a class="dropdown-item" href="#" value="0">Exclude</a>
+                                                <a class="dropdown-item" href="#" value="1">Contact Details</a>
+                                                <a class="dropdown-item" href="#" value="2">Numeric</a>
+                                                <a class="dropdown-item" href="#" value="3">Percentage</a>
+                                                <a class="dropdown-item" href="#" value="4">Money</a>
+                                                <a class="dropdown-item" href="#" value="5">Value Set</a>
+                                                <a class="dropdown-item" href="#" value="6">Yes/No</a>
+                                                <a class="dropdown-item" href="#" value="7">String</a>
+                                                <a class="dropdown-item" href="#" value="8">GA Merge Variable</a>
+                                                <a class="dropdown-item" href="#" value="9">Response Variable</a>
                                           </div>
                                     </div>
                                     </td>
@@ -123,6 +145,7 @@
         <br/>
          <div id="results-card" class="card" style="display: none">
                 <div class="card-body">
+                    <h3 class="card-title">Customer Follow Up List <button id="export-button" class="btn btn-success pull-right">Export as Excel File</button></h3> <br/>
                     <table id="results-table" class="table table-striped">
                         <thead></thead>
                         <tbody></tbody>

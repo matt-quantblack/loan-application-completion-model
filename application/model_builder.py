@@ -1,3 +1,7 @@
+from io import BytesIO
+
+from xlsxwriter import Workbook
+
 from application.file_manager import list_to_csv, csv_to_list, csv_to_list_from_bin_file
 import pandas as pd
 
@@ -89,3 +93,37 @@ def build_and_predict(file, data_template_path, fields, connect_ga):
     #return the dataframe
     return df
 
+def export_to_excel(customers):
+
+    output = BytesIO()
+
+    book = Workbook(output)
+    sheet = book.add_worksheet('Customer List')
+
+    fields = []
+
+    #write the details of each customer in a row
+    for row in range(len(customers)):
+        customer = customers[row]
+
+        if row == 0:
+            fields = customer.keys()
+
+            col = 0
+            for field in fields:
+                sheet.write(0, col, field)
+                col += 1
+
+        col = 0
+        for field in fields:
+            sheet.write(row+1, col, customer[field])
+            col += 1
+
+    # Set the columns width so it's easier to read.
+    sheet.set_column('A:Z', 48)
+
+    book.close()
+
+    output.seek(0)
+
+    return output
