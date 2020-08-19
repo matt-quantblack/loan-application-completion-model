@@ -109,7 +109,10 @@ def api_model_build():
     fields = json.loads(fields_string)
 
     #get a dataframe of the contacts as a Pandas Dataframe
-    contacts = model_builder.build_and_predict(file, DATA_TEMPLATE_PATH, fields, connect_ga)
+    try:
+        contacts = model_builder.build_and_predict(file, DATA_TEMPLATE_PATH, fields, connect_ga)
+    except ValueError as err:
+        return jsonify({'success': False, 'error': str(err)})
 
     # Jsonify the data from a Panads Dataframe to a string
     json_str = contacts.to_json(orient="records")

@@ -6,15 +6,14 @@
 * Created: 24/07/2020
 */
 
+/**
+ * Helper function for sending api requests with json datatype
+ * @param  {String} url         The url to post to
+ * @param  {JSON}   data        JSON data to be posted
+ * @param  {JSON}   onsuccess   function to call if successful
+ */
 function api_request_post(url, data, onsuccess)
 {
-    /* Helper function for sending api requests with json datatype
-    *  Args:
-    *   url: The url to post to
-    *   data: JSON data to be posted
-    *   onsuccess: function to call if successful
-    */
-
     $.ajax({
         url: url,
         type: "POST",
@@ -29,15 +28,15 @@ function api_request_post(url, data, onsuccess)
   });
 }
 
+
+/**
+ * Helper function for sending api requests with json datatype as well as attached files
+ * @param  {String} url         The url to post to
+ * @param  {JSON}   data        JSON data to be posted as FormData including file
+ * @param  {JSON}   onsuccess   function to call if successful
+ */
 function api_request_post_file(url, data, onsuccess)
 {
-    /* Helper function for sending api requests with json datatype as well as attached files
-    *  Args:
-    *   url: The url to post to
-    *   data: JSON data to be posted as FormData including file
-    *   onsuccess: function to call if successful
-    */
-
     //post file to api
     $.ajax({
         url: url,
@@ -53,26 +52,26 @@ function api_request_post_file(url, data, onsuccess)
     });
 }
 
+
+/**
+ * Generic server error function - currently just displays in an alert box
+ * @param  {String} msg     Message to display
+ */
 function server_error(msg)
 {
-    /* Generic server error function - currently just displays in an alert box
-    *  Args:
-    *   msg: Msg to display
-    */
-
     alert("Server Error: " + msg);
 }
 
+
+/**
+ * Helper function for delegating response based on success = True/False and error
+ *  fields in the response json
+ * @param  {JSON} data              The response as JSON
+ * @param  {Callback} on_success    Function to call if success==True
+ * @param  {Callback} on_fail       Function to call if success==False
+ */
 function manage_response(data, on_success, on_fail, error_selector)
 {
-    /* Helper function for delegating response based on success = True/False and error
-    *  fields in the response json
-    *  Args:
-    *   data: Teh response as JSON
-    *   on_success: function to call if success==True
-    *   on_fail: function to call if success==False
-    */
-
     //check for success field
     if(data.hasOwnProperty("success"))
     {

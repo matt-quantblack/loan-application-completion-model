@@ -11,13 +11,12 @@ let credentials_attached = false;
 //global variable to store the resulting customer list locally for easy reupload
 let result_customer_list = [];
 
+
+/**
+ * Gets the field names and data types from the DOM
+ * @return {Array}      An array of each field
+ */
 function gather_fields() {
-    /* Gets the field names and data types from the DOM
-    *
-    * Returns:
-    *   fields (array): An array of each field
-    *
-    */
 
     // Gather field data types
     let fields = [];
@@ -35,21 +34,19 @@ function gather_fields() {
     return fields;
 }
 
+/**
+ * Add two numbers together
+ * @param  {Array} fields   An array of each field
+ * @return {Boolean}        True if valid data
+ */
 validate_data = function(fields) {
     /*
-    * Validates the data before building the model
     * Data Requirements:
     * Must have only one response variable
     * All fields must have a selection
     * If GA credentials are installed a profile must be selected
     * GA Merge variable required if Google Analytics is not excluded
     * Server side will validate correct data types eg. Numeric and percentage are numbers, Yes/No contain only yes/no
-    *
-    * Args:
-    *   fields (array): An array of each field
-    *
-    * Returns:
-    *   True if no errors otherwise false
     */
 
     // Array to hold errors
@@ -114,8 +111,11 @@ validate_data = function(fields) {
 
 };
 
+
+/**
+ * After validating data will build the model
+ */
 function build() {
-    /* After validating data will build the model   */
 
     //get the fields from the DOM
     let fields = gather_fields();
@@ -125,13 +125,12 @@ function build() {
         build_and_predict(fields);
 }
 
+
+/**
+ * Checks if the user really wants to delete the credentials file
+ * @param  {Event} e The click event
+ */
 function check_remove_cred(e) {
-    /*
-    * Checks if the user really wants to delete the credentials file
-    *
-    * Args:
-    *   e (event): The click event
-    */
 
     //stop page reload
     e.preventDefault();

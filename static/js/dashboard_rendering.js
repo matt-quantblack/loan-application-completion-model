@@ -6,14 +6,11 @@
 * Created: 26/07/2020
 */
 
-
+/**
+ * Renders a dowpdown button when a dropdown item has been pressed
+ * @param  {Event} e The click event
+ */
 function select_option(e) {
-    /*
-    * Renders a dowpdown button when a dropdown item has been pressed
-    *
-    * Args:
-    *   e (event): The click event
-    */
 
     //prevent page reload
     e.preventDefault();
@@ -30,14 +27,13 @@ function select_option(e) {
     selection.text(text);
 }
 
+
+/**
+ * Renders dropdown items based on a list of data
+ * @param  {String} selector The jquery selector to select the dropdown list
+ * @param  {Array}   data     Array of items to add, id is used as value and name is used as text
+ */
 function render_dropdown(selector, data) {
-    /*
-    * Renders dropdown items based on a list of data
-    *
-    * Args:
-    *   selector (string): the jquery selector to select the dropdown list
-    *   data (array): array of items to add, id is used as value and name is used as text
-    */
 
     //clear the current dropdown list
     $(selector).empty();
@@ -49,8 +45,11 @@ function render_dropdown(selector, data) {
     });
 }
 
+
+/**
+ * Removes the disabled button from the build model button once a csv file has been loaded
+ */
 function data_file_changed() {
-    /* Removes the disabled button from the build model button once a csv file has been loaded   */
     $("#build-button").prop('disabled', false);
 }
 
@@ -59,6 +58,11 @@ function data_file_changed() {
 // Credential Uploading
 /////////////////////////////////////////////////////
 
+
+/**
+ * Toggles the upload credentials div
+ * @param  {Event} e The click event
+ */
 function show_cred_upload(e) {
     /*
     * Toggles the upload credentials div
@@ -72,13 +76,12 @@ function show_cred_upload(e) {
     $("#cancel-change-cred").show();
 }
 
+
+/**
+ * Toggles the google analytics profile select div
+ * @param  {Event} e The click event
+ */
 function cancel_cred_upload(e) {
-    /*
-    * Toggles the google analytics profile select div
-    *
-    * Args:
-    *   e (event): click event
-    */
 
     e.preventDefault();
     $(".google-analytics.connected").show();
@@ -86,15 +89,23 @@ function cancel_cred_upload(e) {
     $("#cancel-change-cred").hide();
 }
 
+
+/**
+ * Renders DOM showing a loading state for uploading credentials
+ */
 function render_credential_upload_state() {
-    /* Renders DOM showing a loading state for uploading credentials  */
+
     $("#credential-btn").addClass('disabled');
     $("#cred-form .details").text("Uploading new credentials file");
     $("#cred-form .ajax-loader").show();
 }
 
+
+/**
+ * Renders DOM after the successful upload of new credentials
+ */
 function render_set_credential_success() {
-    /* Renders DOM after the successful upload of new credentials  */
+
     $(".google-analytics.checking").show();
     $(".google-analytics.not-configured").hide();
     $("#cred-form .details").text("(Optional)");
@@ -104,8 +115,11 @@ function render_set_credential_success() {
     check_credentials();
 }
 
+
+/**
+ * Renders DOM after the failed upload of new credentials
+ */
 function render_set_credential_failed() {
-    /* Renders DOM after the failed upload of new credentials  */
     $("#cred-form .details").text("(Optional)");
     $("#cred-form .ajax-loader").hide();
 }
@@ -114,13 +128,12 @@ function render_set_credential_failed() {
 // Checking if GA Credentials Exist
 /////////////////////////////////////////////////////
 
+
+/**
+ * Renders DOM after the successful checking of new credentials
+ * @param  {JSON} data The response data
+ */
 function render_check_credentials_success(data) {
-    /* Renders DOM after the successful checking of new credentials
-    *
-    * Args:
-    *   data (json): the response data
-    *
-    */
 
     if(data.hasOwnProperty("result") && data["result"] == true) {
         $(".google-analytics.checking").hide();
@@ -132,8 +145,11 @@ function render_check_credentials_success(data) {
         render_check_credentials_failed();
 }
 
+
+/**
+ * Renders DOM after failed credential check
+ */
 function render_check_credentials_failed() {
-    /* Renders DOM after failed credential check  */
 
     $(".google-analytics.checking").hide();
     $(".google-analytics.not-configured").show();
@@ -144,13 +160,19 @@ function render_check_credentials_failed() {
 // Removing GA Credentials file
 /////////////////////////////////////////////////////
 
+
+/**
+ * Renders DOM loading elements for removing credentials
+ */
 function render_credential_remove_state() {
-    /* Renders DOM loading elements for removing credentials  */
     $(this).parent().find("img").show();
 }
 
+
+/**
+ * Renders DOM after the successful removal of credentials
+ */
 function render_credential_remove_success() {
-    /* Renders DOM after the successful removal of credentials  */
 
     $(this).parent().find("img").hide();
     $(".google-analytics.connected").hide();
@@ -163,12 +185,13 @@ function render_credential_remove_success() {
 /////////////////////////////////////////////////////
 // Getting Google Analytics Profiles
 /////////////////////////////////////////////////////
+
+
+/**
+ * Renders DOM after successful get of google analytics profiles
+ * @param  {JSON} data The response data
+ */
 function render_get_ga_profiles_success(data) {
-    /* Renders DOM after successful get of google analytics profiles
-    *
-    * Args:
-    *   data (json): The response data
-    */
 
     $(".google-analytics.getting").hide();
     $(".google-analytics.connected").show();
@@ -177,8 +200,11 @@ function render_get_ga_profiles_success(data) {
     render_dropdown("#google-analytics-select .dropdown-menu", options);
 }
 
+
+/**
+ * Renders DOM after the failed attempt of getting google analytics profiles
+ */
 function render_get_ga_profiles_failed() {
-    /* Renders DOM after the failed attempt of getting google analytics profiles  */
 
     $(".google-analytics.getting").hide();
     $("#cancel-change-cred").hide();
@@ -189,12 +215,11 @@ function render_get_ga_profiles_failed() {
 // Data Template fields
 /////////////////////////////////////////////////////
 
+/**
+ * Renders DOM after getting all the datatypes for the csv fields currently loaded clientside
+ * @param  {JSON} data The response data
+ */
 function render_data_fields(data) {
-    /* Renders DOM after getting all the datatypes for the csv fields currently loaded clientside
-    *
-    * Args:
-    *   data (json): The response data
-    */
 
     data.data.forEach(function(val) {
         //get the dropdown item that matches this field name
@@ -212,17 +237,20 @@ function render_data_fields(data) {
 /////////////////////////////////////////////////////
 // Building model and displaying results
 /////////////////////////////////////////////////////
+
+/**
+ * Renders loading div to show model is being built
+ */
 function render_build_model_state() {
-    /* Renders loading div to show model is being built  */
     $("#build-model-loader").show();
 }
 
+
+/**
+ * Renders DOM after successful building of model - showing list of priority customers in a table
+ * @param  {JSON} data The response data
+ */
 function render_build_model_success(data) {
-    /* Renders DOM after successful building of model - showing list of priority customers in a table
-    *
-    * Args:
-    *   data (json): The response data
-    */
 
     let isFirst = true; // used to determine header information
 
@@ -262,24 +290,40 @@ function render_build_model_success(data) {
     });
 
     // Hide the loading div
-    $("#build-model-loader").hide();
+    $("#results-loader-card").hide();
+    $("#build-button").prop('disabled', false);
 
     // Scroll down to the start of results
     $("#results-card").show();
     $('html, body').animate({
             scrollTop: $("#results-card").offset().top
         }, 2000);
+
+
 }
 
+
+/**
+ * Renders DOM if the model build process failed
+ */
 function render_build_model_failed() {
-    /* Renders DOM if the model build process failed */
-    $("#build-model-loader").hide();
+    // Hide the loading div
+    $("#results-loader-card").hide();
+    $("#build-button").prop('disabled', false);
 }
 
+
+/**
+ * Simple alert success
+ */
 function render_excel_file_success() {
-    alert("Fone");
+    alert("Done");
 }
 
+
+/**
+ * Simple alert error
+ */
 function render_excel_file_failed() {
     alert("Failed");
 }

@@ -6,15 +6,12 @@
 * Created: 24/07/2020
 */
 
+/**
+ * Reads the first line of a csv file
+ * @param  {String}     file the file object to parse
+ * @param  {Callback}   on_complete function to run once successful
+ */
 read_header = function (file, on_complete) {
-    /*
-    * Reads the first line of a csv file
-    *
-    *   Args:
-    *       file: the file object to parse
-    *       on_complete: function to run once successful
-    */
-
     //create a file reader
     var reader = new FileReader();
 
@@ -36,6 +33,10 @@ read_header = function (file, on_complete) {
 };
 
 
+/**
+ * Renders the header fields into HTML
+ * @param  {Array} fields the string fields from the header line of the csv
+ */
 display_header = function(fields) {
     /*
     * Renders the header fields into HTML
@@ -81,6 +82,7 @@ display_header = function(fields) {
     get_data_template(fields);
 
 };
+
 
 //listen for a new file selection on this csv parser to start the parsing function
 $( document ).ready(function() {
