@@ -5,7 +5,10 @@ who did not complete a loan application, that are more likely to complete the lo
 
 
 This is achieved by analysing the supplied data, building clustering, logistic regression and random forest machine 
-learning models in an automated process and then predicting the best customers to chase to complete their application. 
+learning models in an automated process and then predicting the best customers to chase to complete their application.
+
+
+This is a stand alone application that uses Flask as a web browser based GUI to the python backend. 
 
 ## Getting Started
 
