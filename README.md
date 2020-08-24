@@ -2,7 +2,9 @@
 
 This application takes a list of loan application data and produces a ranked list of customers, 
 who did not complete a loan application, that are more likely to complete the loan application on follow up.
-This achieved by analysing the supplied data, building clustering, logistic regression and random forest machine 
+
+
+This is achieved by analysing the supplied data, building clustering, logistic regression and random forest machine 
 learning models in an automated process and then predicting the best customers to chase to complete their application. 
 
 ## Getting Started
