@@ -2,21 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36fc2856-9cc1-4cd3-bfcb-6c7037ab8a73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/application/random_forest_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/file_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/file_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/ga_adapter.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/ga_adapter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/logistic_regression_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/logistic_regression_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/model_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/model_builder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/tests/clustering_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/tests/clustering_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/tests/data_prep_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/tests/data_prep_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/tests/prediction_model_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/tests/prediction_model_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/google_analytics/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/tests/google_analytics_data_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/google_analytics/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/dashboard_rendering.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/dashboard_rendering.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/random_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +76,7 @@
       <recent name="D:\Python Projects\Vantage" />
     </key>
   </component>
-  <component name="RunManager" selected="Flask server.Vantage">
+  <component name="RunManager" selected="Python tests.pytest in prediction_model_tests.py">
     <configuration name="Vantage" type="Python.FlaskServer">
       <module name="Vantage" />
       <option name="target" value="$PROJECT_DIR$/app.py" />
@@ -98,7 +92,7 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for data_prep_tests.test_stripdown_splits_response_variable_works_if_scale_of_0_to_100" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest in clustering_tests.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="Vantage" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -110,24 +104,8 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;data_prep_tests.test_stripdown_splits_response_variable_works_if_scale_of_0_to_100&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test_api.test_cred_check_is_true" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="Vantage" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_api.test_cred_check_is_true&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/application/tests/clustering_tests.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="pytest in data_prep_tests.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
@@ -178,21 +156,37 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="pytest in tests" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="Vantage" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/application/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/application/tests&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Flask server.Vantage" />
+      <item itemvalue="Python tests.pytest in tests" />
+      <item itemvalue="Python tests.pytest in clustering_tests.py" />
       <item itemvalue="Python tests.pytest in data_prep_tests.py" />
-      <item itemvalue="Python tests.pytest for data_prep_tests.test_stripdown_splits_response_variable_works_if_scale_of_0_to_100" />
       <item itemvalue="Python tests.pytest in google_analytics_data_tests.py" />
       <item itemvalue="Python tests.pytest in prediction_model_tests.py" />
-      <item itemvalue="Python tests.pytest for test_api.test_cred_check_is_true" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.pytest for test_api.test_cred_check_is_true" />
         <item itemvalue="Python tests.pytest in prediction_model_tests.py" />
         <item itemvalue="Python tests.pytest in google_analytics_data_tests.py" />
         <item itemvalue="Python tests.pytest in data_prep_tests.py" />
-        <item itemvalue="Python tests.pytest for data_prep_tests.test_stripdown_splits_response_variable_works_if_scale_of_0_to_100" />
+        <item itemvalue="Python tests.pytest in clustering_tests.py" />
+        <item itemvalue="Python tests.pytest in tests" />
       </list>
     </recent_temporary>
   </component>
@@ -215,7 +209,7 @@
       <workItem from="1597798963811" duration="50000" />
       <workItem from="1597799053998" duration="80000" />
       <workItem from="1597799146788" duration="18787000" />
-      <workItem from="1598002390039" duration="14996000" />
+      <workItem from="1598002390039" duration="19753000" />
     </task>
     <servers />
   </component>
@@ -244,54 +238,54 @@
     </state>
     <state width="1201" height="466" key="DebuggerActiveHint/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595475654197" />
     <state width="1292" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1598241985204" />
-    <state width="1877" height="208" key="GridCell.Tab.0.bottom" timestamp="1598242187737">
+    <state width="1877" height="208" key="GridCell.Tab.0.bottom" timestamp="1598247070341">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596171084002" />
     <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1598005934797" />
-    <state width="1877" height="208" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598242187737" />
-    <state width="1877" height="208" key="GridCell.Tab.0.center" timestamp="1598242187737">
+    <state width="1877" height="208" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598247070341" />
+    <state width="1877" height="208" key="GridCell.Tab.0.center" timestamp="1598247070341">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596171084002" />
     <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1598005934797" />
-    <state width="1877" height="208" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598242187737" />
-    <state width="1877" height="208" key="GridCell.Tab.0.left" timestamp="1598242187737">
+    <state width="1877" height="208" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598247070341" />
+    <state width="1877" height="208" key="GridCell.Tab.0.left" timestamp="1598247070341">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596171084002" />
     <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1598005934781" />
-    <state width="1877" height="208" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598242187737" />
-    <state width="1877" height="208" key="GridCell.Tab.0.right" timestamp="1598242187737">
+    <state width="1877" height="208" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598247070341" />
+    <state width="1877" height="208" key="GridCell.Tab.0.right" timestamp="1598247070341">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596171084002" />
     <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1598005934797" />
-    <state width="1877" height="208" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598242187737" />
-    <state width="1877" height="261" key="GridCell.Tab.1.bottom" timestamp="1598242035898">
+    <state width="1877" height="208" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598247070341" />
+    <state width="1877" height="261" key="GridCell.Tab.1.bottom" timestamp="1598245012056">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596170582868" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1598005943719" />
-    <state width="1877" height="261" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598242035898" />
-    <state width="1877" height="261" key="GridCell.Tab.1.center" timestamp="1598242035898">
+    <state width="1877" height="261" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598245012056" />
+    <state width="1877" height="261" key="GridCell.Tab.1.center" timestamp="1598245012056">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596170582868" />
     <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1598005943719" />
-    <state width="1877" height="261" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598242035898" />
-    <state width="1877" height="261" key="GridCell.Tab.1.left" timestamp="1598242035898">
+    <state width="1877" height="261" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598245012056" />
+    <state width="1877" height="261" key="GridCell.Tab.1.left" timestamp="1598245012056">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596170582868" />
     <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1598005943719" />
-    <state width="1877" height="261" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598242035898" />
-    <state width="1877" height="261" key="GridCell.Tab.1.right" timestamp="1598242035898">
+    <state width="1877" height="261" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598245012056" />
+    <state width="1877" height="261" key="GridCell.Tab.1.right" timestamp="1598245012056">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596170582868" />
     <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1598005943719" />
-    <state width="1877" height="261" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598242035898" />
+    <state width="1877" height="261" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598245012056" />
     <state x="461" y="163" key="SettingsEditor" timestamp="1597799123520">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -377,6 +371,16 @@
           <line>252</line>
           <option name="timeStamp" value="150" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app.py</url>
+          <line>172</line>
+          <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app.py</url>
+          <line>179</line>
+          <option name="timeStamp" value="153" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -445,15 +449,15 @@
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_stripdown_splits_response_variable_works_if_scale_of_0_to_100.coverage" NAME="pytest for data_prep_tests.test_stripdown_splits_response_variable_works_if_scale_of_0_to_100 Coverage Results" MODIFIED="1598242016716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_validate_types_value_set_success.coverage" NAME="pytest for data_prep_tests.test_validate_types_value_set_success Coverage Results" MODIFIED="1597035660725" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_split_response_variable_works.coverage" NAME="pytest for data_prep_tests.test_split_response_variable_works Coverage Results" MODIFIED="1597022174559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
-    <SUITE FILE_PATH="coverage/Vantage$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1598235449115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
-    <SUITE FILE_PATH="coverage/Vantage$Vantage.coverage" NAME="Vantage Coverage Results" MODIFIED="1598242187724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Vantage$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1598247039384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
+    <SUITE FILE_PATH="coverage/Vantage$Vantage.coverage" NAME="Vantage Coverage Results" MODIFIED="1598247028457" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Vantage$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1595306261050" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Vantage$file_manager.coverage" NAME="file_manager Coverage Results" MODIFIED="1598235439935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application" />
-    <SUITE FILE_PATH="coverage/Vantage$pytest_in_clustering_tests_py.coverage" NAME="pytest in clustering_tests.py Coverage Results" MODIFIED="1598241068041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
+    <SUITE FILE_PATH="coverage/Vantage$pytest_in_clustering_tests_py.coverage" NAME="pytest in clustering_tests.py Coverage Results" MODIFIED="1598247042844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$model_builder.coverage" NAME="model_builder Coverage Results" MODIFIED="1597033346122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_knn_imputer_fills_nulls_on_numeric.coverage" NAME="pytest for data_prep_tests.test_knn_imputer_fills_nulls_on_numeric Coverage Results" MODIFIED="1597024096214" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_validate_types_numeric_string_converts_throws_error.coverage" NAME="pytest for data_prep_tests.test_validate_types_numeric_string_converts_throws_error Coverage Results" MODIFIED="1597034749353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
-    <SUITE FILE_PATH="coverage/Vantage$pytest_in_data_prep_tests_py.coverage" NAME="pytest in data_prep_tests.py Coverage Results" MODIFIED="1598242035887" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
+    <SUITE FILE_PATH="coverage/Vantage$pytest_in_data_prep_tests_py.coverage" NAME="pytest in data_prep_tests.py Coverage Results" MODIFIED="1598247054641" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_validate_types_value_set_throws_value_excpetion_too_many_values.coverage" NAME="pytest for data_prep_tests.test_validate_types_value_set_throws_value_excpetion_too_many_values Coverage Results" MODIFIED="1597035831575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_validate_types_success.coverage" NAME="pytest for data_prep_tests.test_validate_types_success Coverage Results" MODIFIED="1597034535889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_validate_types_percentage_converts_success.coverage" NAME="pytest for data_prep_tests.test_validate_types_percentage_converts_success Coverage Results" MODIFIED="1598241516011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
@@ -463,13 +467,13 @@
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests.coverage" NAME="pytest for data_prep_tests Coverage Results" MODIFIED="1598241293861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_stripdown_splits_x_variables.coverage" NAME="pytest for data_prep_tests.test_stripdown_splits_x_variables Coverage Results" MODIFIED="1597033341429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_prediction_model_tests_test_logistic_regression.coverage" NAME="pytest for prediction_model_tests.test_logistic_regression Coverage Results" MODIFIED="1597809073684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
-    <SUITE FILE_PATH="coverage/Vantage$pytest_in_prediction_model_tests_py.coverage" NAME="pytest in prediction_model_tests.py Coverage Results" MODIFIED="1598242053568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
+    <SUITE FILE_PATH="coverage/Vantage$pytest_in_prediction_model_tests_py.coverage" NAME="pytest in prediction_model_tests.py Coverage Results" MODIFIED="1598247070341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_test_api_test_cred_check_is_true.coverage" NAME="pytest for test_api.test_cred_check_is_true Coverage Results" MODIFIED="1598242114324" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Vantage$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1595301306157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_knn_imputer_does_nothing_if_no_nulls.coverage" NAME="pytest for data_prep_tests.test_knn_imputer_does_nothing_if_no_nulls Coverage Results" MODIFIED="1597024790828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_clustering_tests_test_determine_best_prediction_model.coverage" NAME="pytest for clustering_tests.test_determine_best_prediction_model Coverage Results" MODIFIED="1598241499009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_clustering_tests_test_determine_target_cluster_success.coverage" NAME="pytest for clustering_tests.test_determine_target_cluster_success Coverage Results" MODIFIED="1597043467916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
-    <SUITE FILE_PATH="coverage/Vantage$pytest_in_google_analytics_data_tests_py.coverage" NAME="pytest in google_analytics_data_tests.py Coverage Results" MODIFIED="1598242043801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
+    <SUITE FILE_PATH="coverage/Vantage$pytest_in_google_analytics_data_tests_py.coverage" NAME="pytest in google_analytics_data_tests.py Coverage Results" MODIFIED="1598247061764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_clustering_tests_test_cluster.coverage" NAME="pytest for clustering_tests.test_cluster Coverage Results" MODIFIED="1597042914472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_stripdown_splits_response_variable_works.coverage" NAME="pytest for data_prep_tests.test_stripdown_splits_response_variable_works Coverage Results" MODIFIED="1598241811560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />
     <SUITE FILE_PATH="coverage/Vantage$pytest_for_data_prep_tests_test_split_x_works.coverage" NAME="pytest for data_prep_tests.test_split_x_works Coverage Results" MODIFIED="1597022154929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/tests" />

@@ -1,6 +1,7 @@
 google_analytics_cred.json
 venv
 .pytest_cache
+application/tests/.pytest_cache
 .idea
 __pycache__
 application/tests/google_analytics_cred.json

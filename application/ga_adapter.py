@@ -1,11 +1,12 @@
-
 from apiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 
+
 class GAAdapter:
+    """ An adapter for communicating with the Hello API for Google Analytics"""
 
     def __init__(self):
-
+        # The google analytics service object for making requests
         self.service = None
 
     def connect(self, scopes, key_file_location, api_name='analytics', api_version='v3'):
@@ -26,6 +27,14 @@ class GAAdapter:
         self.service = build(api_name, api_version, credentials=credentials)
 
     def __get_account_by_index(self, index):
+        """Gets a Google Analytics account by index
+
+            Args:
+                index (int): The array index of the account
+
+            Returns:
+                account: the GA account object or none
+        """
 
         # Get a list of all Google Analytics accounts for this user
         accounts = self.service.management().accounts().list().execute()
@@ -38,7 +47,15 @@ class GAAdapter:
             return None
 
     def __get_property_by_index(self, account, index):
+        """Gets a Google Analytics property by index
 
+            Args:
+                index (int): The array index of the property
+                account: the account object from the google analytics service
+
+            Returns:
+                property: the GA property object or none
+        """
         # Get a list of all the properties for the first account.
         properties = self.service.management().webproperties().list(
             accountId=account).execute()
@@ -57,6 +74,9 @@ class GAAdapter:
 
             Args:
                 account: A google analytics account object
+
+            Returns:
+                list: the list of profile names and ids
         """
 
         #make sure a connection has been made
@@ -90,16 +110,22 @@ class GAAdapter:
         return None
 
     def get_data(self, profile_id, dimensions, start_date='7daysAgo'):
-        """ Get's the a generic data snapshot associated with the profile id
+        """ Get's the a data snapshot with dimensions associated with the profile id
 
                 Args:
-                    profile_id: The profile id for the Google Analytics profile
+                    profile_id (string): The profile id for the Google Analytics profile
+                    dimensions (string): The google analytics string that specifies what data to get
+                    start_date (string): The google analytics start date string
+
+                Returns:
+                    results: the google analytics results object
             """
 
         # make sure a connection has been made
         if self.service is None:
             raise TypeError("A Google Analytics Service object has not been created. Run connect() first.")
 
+        # Get the data from GA
         results = self.service.data().ga().get(
             ids='ga:' + profile_id,
             start_date=start_date,
@@ -112,6 +138,15 @@ class GAAdapter:
 
 
 def get_profiles(key_file_location):
+    """ A helper function to get the profiles from Google Analytics
+
+            Args:
+                key_file_location (string): The location on disk for the credentials file
+
+            Returns:
+                list: the list of profiles and ids
+        """
+
     ga_adapter = GAAdapter()
     ga_adapter.connect(scopes=['https://www.googleapis.com/auth/analytics.readonly'],
                        key_file_location=key_file_location)
@@ -121,9 +156,21 @@ def get_profiles(key_file_location):
 
 
 def get_data(key_file_location, profile_id, dimensions, start_date):
+    """ A helper function to get the data from Google Analytics
+
+            Args:
+                key_file_location (string): The location on disk for the credentials file
+                profile_id (string): The specific profile id to get data from
+                dimensions (string): The google analytics string to specify the data to get
+                start_date (string): The google analytics start date string
+
+            Returns:
+                results: the google analytics results object
+        """
+
     ga_adapter = GAAdapter()
     ga_adapter.connect(scopes=['https://www.googleapis.com/auth/analytics.readonly'],
                        key_file_location=key_file_location)
-    df = ga_adapter.get_data(profile_id, dimensions, start_date)
+    results = ga_adapter.get_data(profile_id, dimensions, start_date)
 
-    return df
+    return results

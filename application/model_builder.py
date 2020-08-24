@@ -11,11 +11,12 @@ import pandas as pd
 from sklearn.impute import KNNImputer
 import numpy as np
 
-MAX_NULL_PERCENT = 0.1
-MAX_VALUE_SET = 20
-CROSS_VAL_FOLDS = 10
-SUCCESS_VALUE = 100
-MIN_SUCCESS_PROPORTION = 0.05
+MAX_NULL_PERCENT = 0.1  # Maximum number of nulls allowed in feature before it is excluded
+MAX_VALUE_SET = 20  # Maximum number of values in a value set to prevent too many columns
+CROSS_VAL_FOLDS = 10  # Number of cross validation folds to use
+SUCCESS_VALUE = 100  # The value that indicates a success (client has vales from 0 to 100 with 100 being success)
+MIN_SUCCESS_PROPORTION = 0.05  # Minimum number of successes in data set required to build a robust model
+
 
 def update_data_template(data_template_path, fields):
     """Ensures the data template csv file stays updated with any changes or additions to data fields and types
@@ -23,9 +24,6 @@ def update_data_template(data_template_path, fields):
         Args:
             data_template_path (string): filepath for the data template csv
             fields (list): The list of fields names and data types
-
-        Returns:
-            list: a list of customers and contact details
         """
 
     # First get the data template csv data
@@ -33,6 +31,7 @@ def update_data_template(data_template_path, fields):
 
     # Compare the data template with the passed fields to see if there are any changes
     changed = False
+
     # Go through the current fields first
     for index1 in range(len(current_fields)):
         field1 = current_fields[index1]
@@ -50,7 +49,8 @@ def update_data_template(data_template_path, fields):
     # Now need to check if there are any new fields
     for field2 in fields:
         found = False
-        #check for a matching field name in current fields
+
+        # Check for a matching field name in current fields
         for field1 in current_fields:
             if field1[0] == field2[0]:
                 found = True
@@ -76,8 +76,10 @@ def validate_types(df, fields):
             (pandas.DataFrame): the modified dataframe with converted data types
         """
 
+    # Go through each field and validate data based on the expected field type
     for field_info in fields:
 
+        # Field name and type are stored in a list of length 2
         field_name = field_info[0]
         field_type = field_info[1]
 
@@ -87,15 +89,22 @@ def validate_types(df, fields):
                               "String", "GA Merge Variable", "Response Variable"]:
             raise ValueError("Unknown variable type {} for field {}"
                              .format(field_type, field_name))
+
+        # Numeric fields are any type of number
         elif field_type == "Numeric":
+
+            # Might be sent as a string so convert to a float
             if df[field_name].dtype == object:
-                df[field_name] = df[field_name].where(df[field_name] != '', np.nan)  # make sure we have a na for missing data
+                df[field_name] = df[field_name].where(df[field_name] != '', np.nan)  #  Make sure we have a na for missing data
                 df[field_name] = df[field_name].astype(float)
+
+        # Percentage field is a number between 0 and 1 or between 1 and 100
         elif field_type == "Percentage":
+
             # Remove string representation of percentage
             if df[field_name].dtype == object:
                 df[field_name] = df[field_name].str.replace("%", "")
-                df[field_name] = df[field_name].where(df[field_name] != '', np.nan)  # make sure we have a na for missing data
+                df[field_name] = df[field_name].where(df[field_name] != '', np.nan)  #  Make sure we have a na for missing data
 
                 # Convert to a float
                 df[field_name] = df[field_name].astype(float)
@@ -113,17 +122,18 @@ def validate_types(df, fields):
                 raise ValueError("Percentage values must be between 0 and 1 or between 1 and 100 for field {}"
                                  .format(field_name))
 
+        # Some data is sent as a string with a $ sign but needs to be a number
         elif field_type == "Money":
             # Remove string representation of money
             if df[field_name].dtype == object:
                 df[field_name] = df[field_name].str.replace("$", "")
                 df[field_name] = df[field_name].str.replace(",", "")
-                df[field_name] = df[field_name].where(df[field_name] != '', np.nan)  # make sure we have a na for missing data
-
+                df[field_name] = df[field_name].where(df[field_name] != '', np.nan)  #  Make sure we have a na for missing data
 
             # Convert to a float
             df[field_name] = df[field_name].astype(float)
 
+        # Value set is a selection of predefined text values
         elif field_type == "Value Set":
             # Count how many unique values
             unique = len(df[field_name].unique())
@@ -133,6 +143,7 @@ def validate_types(df, fields):
                 raise ValueError("The maximum number of values in a Value Set is {}. The field {} has {}."
                                  .format(MAX_VALUE_SET, field_type, unique))
 
+        # This is a boolean field but can also contain "No Data"
         elif field_type == "Yes/No":
             # Count how many unique values
             unique = len(df[field_name].unique())
@@ -216,6 +227,7 @@ def stripdown_features(df, fields):
 
     return new_df, y, fields
 
+
 def impute_nulls(df, fields):
     """This function fills missing categorical data iwth "No Data" and Imputes missing numerical data with
     KNNImputer
@@ -295,7 +307,7 @@ def encode_categorical(x, fields):
     return enc_df
 
 
-def cluster(df, random_state = None):
+def cluster(df, random_state=None):
     """Use Gower distances and K Medioids to cluster the data from between 2 to 8 clusters.
     Uses silhouette analysis to determine optimal number of clusters
 
@@ -337,12 +349,13 @@ def cluster(df, random_state = None):
 
     return k_medoids.labels_, best_cluster[0]
 
+
 def determine_target_cluster(success_labels, cluster_labels, cluster_count):
     """Determines the target cluster by calculating % of successes (response variable) for each
     cluster. Returns the cluster index with the higher % success.
 
         Args:
-            success_column (numpy array): The response variable column
+            success_labels (numpy array): The response variable column
             cluster_labels (numpy array): the cluster labelling
             cluster_count (int): the number of clusters
 
@@ -375,6 +388,20 @@ def determine_target_cluster(success_labels, cluster_labels, cluster_count):
 
 
 def best_model_probabilities(x, cluster_labels, target_cluster, cv=CROSS_VAL_FOLDS, random_state=None):
+    """Optimises a logistic regression model and a random forest model to determine which has the best
+    cross validation score. The best model is used to predict the probabilities that a customer
+    belongs to the cluster with the highest success in application completions
+
+        Args:
+            x (Pandas.DataFroma): The features
+            cluster_labels (numpy array): the cluster labelling
+            target_cluster (int): the cluster with the highes % application completions
+            cv (int): the number of cross validation folds
+            random_state (int): The random seed can be used for testing for consistent results
+
+        Returns:
+            (list): the probabilities that a customer belongs to the cluster with the highest success
+        """
 
     # Adjust the response variable to be either 1 belongs to target cluster or 0 does not belong
     y = np.where(cluster_labels == target_cluster, 1, 0)
@@ -401,6 +428,7 @@ def merge_google_analytics(df, fields, ga_profile_id, ga_cred_file_location):
                 fields (list): The list of fields and the field types that match the columns in df
                 ga_profile_id (string): The google analytics profile id to extract the data from
                 ga_cred_file_location (string): Location of the credentials file for Google Analytics
+
             Returns:
                 (pandas.DataFrame): the merged data frame
                 fields (list): updated fields list to include the new field items
@@ -448,7 +476,8 @@ def build_and_predict(file, data_template_path, fields, ga_profile_id, ga_cred_f
             file (file): A csv file object
             data_template_path (string): filepath for the data template csv
             fields (list): The list of fields names and data types
-            connect_ga (string): string representing the Google Analytics profile id to use or '0' for none
+            ga_profile_id (string): string representing the Google Analytics profile id to use or '0' for none
+            ga_cred_file_location (string): storage location of the google analytics credentials file
 
         Returns:
             list: a list of customers and contact details
@@ -463,7 +492,8 @@ def build_and_predict(file, data_template_path, fields, ga_profile_id, ga_cred_f
 
     # Throw an error if we don't have any contact details
     if len(contact_fields) == 0:
-        raise ValueError("The supplied data must have at least one field marked as Contact Details to identify customers")
+        raise ValueError("The supplied data must have at least one field marked as \
+        Contact Details to identify customers")
 
     # Get the file contents as a dataframe
     data = csv_to_list_from_bin_file(file, header=False)
@@ -481,7 +511,8 @@ def build_and_predict(file, data_template_path, fields, ga_profile_id, ga_cred_f
 
     # Make sure we have a number of successes to be able to run model
     if len(y[y == 1]) / len(y) < MIN_SUCCESS_PROPORTION:
-        raise ValueError("There needs to be a minimum of {0:.0f}% completed applications in the data set to build a robust model."
+        raise ValueError("There needs to be a minimum of {0:.0f}% completed applications\
+         in the data set to build a robust model."
                          .format(MIN_SUCCESS_PROPORTION*100))
 
     # Fill missing Categorical data with "No Data" and use KNNImpute on numerical data
@@ -501,7 +532,7 @@ def build_and_predict(file, data_template_path, fields, ga_profile_id, ga_cred_f
     # the closer they are to the being the type of customer to complete an application
     prob = best_model_probabilities(x, cluster_labels, best_cluster)
 
-    #Select only the contact details and probabilty scores from the dataframe
+    # Select only the contact details and probabilty scores from the dataframe
     df = df[contact_fields]
     df["Prob"] = prob
 
@@ -511,19 +542,27 @@ def build_and_predict(file, data_template_path, fields, ga_profile_id, ga_cred_f
     # Order the df by probability
     df = df.sort_values(by=["Prob"], axis=0, ascending=False)
 
-    #return the dataframe
+    # Return the dataframe
     return df
 
 def export_to_excel(customers):
+    """Converts customer list data into a Microsoft Excel file and
+    returns the file stream for downloading
 
+        Args:
+            customers (list): A list of customers with customer details on each line
+
+        Returns:
+            filestream: The excel file as a filestream for downloading
+        """
+
+    # Create an Microsoft Excel workbook and sheet
     output = BytesIO()
-
     book = Workbook(output)
     sheet = book.add_worksheet('Customer List')
-
     fields = []
 
-    #write the details of each customer in a row
+    # Write the details of each customer in a row
     for row in range(len(customers)):
         customer = customers[row]
 
@@ -543,8 +582,9 @@ def export_to_excel(customers):
     # Set the columns width so it's easier to read.
     sheet.set_column('A:Z', 48)
 
+    # Close the file and seek back to start of file
     book.close()
-
     output.seek(0)
 
+    # Return the file stream
     return output
