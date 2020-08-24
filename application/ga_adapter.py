@@ -8,7 +8,6 @@ class GAAdapter:
 
         self.service = None
 
-
     def connect(self, scopes, key_file_location, api_name='analytics', api_version='v3'):
         """Connects a service that communicates to a Google API.
 
@@ -90,6 +89,27 @@ class GAAdapter:
         # Return None if not successful
         return None
 
+    def get_data(self, profile_id, dimensions, start_date='7daysAgo'):
+        """ Get's the a generic data snapshot associated with the profile id
+
+                Args:
+                    profile_id: The profile id for the Google Analytics profile
+            """
+
+        # make sure a connection has been made
+        if self.service is None:
+            raise TypeError("A Google Analytics Service object has not been created. Run connect() first.")
+
+        results = self.service.data().ga().get(
+            ids='ga:' + profile_id,
+            start_date=start_date,
+            end_date='today',
+            dimensions=dimensions,
+            metrics='ga:users'
+        ).execute()
+
+        return results
+
 
 def get_profiles(key_file_location):
     ga_adapter = GAAdapter()
@@ -98,3 +118,12 @@ def get_profiles(key_file_location):
     profiles = ga_adapter.get_profiles()
 
     return profiles
+
+
+def get_data(key_file_location, profile_id, dimensions, start_date):
+    ga_adapter = GAAdapter()
+    ga_adapter.connect(scopes=['https://www.googleapis.com/auth/analytics.readonly'],
+                       key_file_location=key_file_location)
+    df = ga_adapter.get_data(profile_id, dimensions, start_date)
+
+    return df

@@ -85,7 +85,10 @@ function build_and_predict(fields)
 
     //collect the data fields and the csv file to upload
     var data = new FormData();
-    data.append('connect_ga', 'Exclude');
+    let ga = "0";
+    if($("#google-analytics-select:visible").length > 0)
+        ga = $("#google-analytics-select .dropdown-toggle").attr('value');
+    data.append('connect_ga', ga);
     data.append('fields', JSON.stringify(fields));
     data.append('file', $('#csv-input')[0].files[0]);
 

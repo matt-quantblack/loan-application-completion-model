@@ -4,7 +4,9 @@ from sklearn_extra.cluster import KMedoids
 from sklearn.metrics import silhouette_score
 from xlsxwriter import Workbook
 from application.file_manager import list_to_csv, csv_to_list, csv_to_list_from_bin_file
+from application.ga_adapter import get_data
 from application import logistic_regression_model
+from application import random_forest_model
 import pandas as pd
 from sklearn.impute import KNNImputer
 import numpy as np
@@ -87,13 +89,14 @@ def validate_types(df, fields):
                              .format(field_type, field_name))
         elif field_type == "Numeric":
             if df[field_name].dtype == object:
-                df[field_name][df[field_name] == ''] = '0' #make sure we have a zero for missing data
+                df[field_name] = df[field_name].where(df[field_name] != '', np.nan)  # make sure we have a na for missing data
                 df[field_name] = df[field_name].astype(float)
         elif field_type == "Percentage":
             # Remove string representation of percentage
             if df[field_name].dtype == object:
-                df[field_name][df[field_name] == ''] = '0'  # make sure we have a zero for missing data
                 df[field_name] = df[field_name].str.replace("%", "")
+                df[field_name] = df[field_name].where(df[field_name] != '', np.nan)  # make sure we have a na for missing data
+
                 # Convert to a float
                 df[field_name] = df[field_name].astype(float)
 
@@ -113,9 +116,10 @@ def validate_types(df, fields):
         elif field_type == "Money":
             # Remove string representation of money
             if df[field_name].dtype == object:
-                df[field_name][df[field_name] == ''] = '0'  # make sure we have a zero for missing data
                 df[field_name] = df[field_name].str.replace("$", "")
                 df[field_name] = df[field_name].str.replace(",", "")
+                df[field_name] = df[field_name].where(df[field_name] != '', np.nan)  # make sure we have a na for missing data
+
 
             # Convert to a float
             df[field_name] = df[field_name].astype(float)
@@ -140,7 +144,7 @@ def validate_types(df, fields):
 
         elif field_type == "Response Variable":
             if df[field_name].dtype == object:
-                df[field_name][df[field_name] == ''] = '0'  # make sure we have a zero for missing data
+                df[field_name] = df[field_name].str.replace('', '0')  # make sure we have a zero for missing data
                 df[field_name] = df[field_name].astype(float)
 
     return df
@@ -178,7 +182,7 @@ def stripdown_features(df, fields):
     # Reassign y as a success or fail - success is 100 because application is 100% complete
     # Only if not in binary format
     if np.all(sorted(y.unique()) != [0, 1]):
-        y = np.where(y >= SUCCESS_VALUE, 1, 0)
+        y = pd.Series(np.where(y >= SUCCESS_VALUE, 1, 0))
 
     # Remove contact fields
     contact_fields = [x[0] for x in fields if x[1] == "Contact Details"]
@@ -207,7 +211,10 @@ def stripdown_features(df, fields):
     # Remove the fields that should be excluded
     new_df = df.drop(cols_to_drop, axis=1)
 
-    return new_df, y
+    # Remove the fields from the field data types list that we excluded
+    fields = [field for field in fields if field[0] in new_df.columns]
+
+    return new_df, y, fields
 
 def impute_nulls(df, fields):
     """This function fills missing categorical data iwth "No Data" and Imputes missing numerical data with
@@ -367,18 +374,73 @@ def determine_target_cluster(success_labels, cluster_labels, cluster_count):
     return cluster_index
 
 
-def best_model_probabilities(x, cluster_labels, target_cluster, cv=CROSS_VAL_FOLDS):
+def best_model_probabilities(x, cluster_labels, target_cluster, cv=CROSS_VAL_FOLDS, random_state=None):
 
     # Adjust the response variable to be either 1 belongs to target cluster or 0 does not belong
     y = np.where(cluster_labels == target_cluster, 1, 0)
+
+    # Try the logistic regression model
     lr_score, lr_prob = logistic_regression_model.determine_best_model_probabilities(x, y, cv)
 
-    return lr_prob
+    # Try the Random forest model
+    rf_score, rf_prob = random_forest_model.determine_best_model_probabilities(x, y, cv, random_state)
+
+    # Determine the best one and return the probabilities
+    if rf_score > lr_score:
+        return rf_prob
+    else:
+        return lr_prob
 
 
+def merge_google_analytics(df, fields, ga_profile_id, ga_cred_file_location):
+    """This function connects to the Hello API platform for google analytics, downloads and merges the data
+    based on matching the dimension1 custom Google Analytics column and the Merge Data variable in the csv data set
+
+            Args:
+                df (pandas.DataFrame): the uploaded csv file in a dataframe
+                fields (list): The list of fields and the field types that match the columns in df
+                ga_profile_id (string): The google analytics profile id to extract the data from
+                ga_cred_file_location (string): Location of the credentials file for Google Analytics
+            Returns:
+                (pandas.DataFrame): the merged data frame
+                fields (list): updated fields list to include the new field items
+            """
+
+    # Check we have only one merge variable
+    merge_fields = [x[0] for x in fields if x[1] == "GA Merge Variable"]
+
+    if len(merge_fields) != 1:
+        raise ValueError(
+            "The supplied data must have exactly one field marked as GA Merge Variable or the Google Analytics \
+            connection must be set to Exclude.")
+    else:
+        merge_field = merge_fields[0]
+
+    # Get the data from the google analytics API
+    results = get_data(ga_cred_file_location, ga_profile_id,
+                       dimensions='ga:dimension1, ga:userType, ga:sessionCount, ga:sessionDurationBucket',
+                       start_date='7daysAgo')
+
+    # Convert into a dataframe
+    cols = ["GA Merge Variable", "User Type", "Session Count", "Session Duration"]
+    ga_df = pd.DataFrame(columns=cols)
+    # Exclude the last column as this is just user_count metric
+    for row in results["rows"]:
+        ga_df = ga_df.append(pd.Series(row[:-1], index=cols), ignore_index=True)
+
+    # Merge the data frame on the merge variable ie. user id
+    df = pd.merge(df, ga_df, how="left", left_on=[merge_field], right_on=["GA Merge Variable"])
+    df = df.drop(["GA Merge Variable"], axis=1)
+
+    # Update the fields list to incorporate the datatypes of the new fields
+    fields = fields + [["User Type", "Value Set"],
+                       ["Session Count", "Numeric"],
+                       ["Session Duration", "Numeric"]]
+
+    return df, fields
 
 
-def build_and_predict(file, data_template_path, fields, connect_ga):
+def build_and_predict(file, data_template_path, fields, ga_profile_id, ga_cred_file_location = None):
     """This function starts by updating the data_templates with new field names if the exist
         then builds the model then predicts what are the best customers to follow up on
 
@@ -386,7 +448,7 @@ def build_and_predict(file, data_template_path, fields, connect_ga):
             file (file): A csv file object
             data_template_path (string): filepath for the data template csv
             fields (list): The list of fields names and data types
-            connect_ga (string): string representing the Google Analytics profile to use or 'Exclude' for none
+            connect_ga (string): string representing the Google Analytics profile id to use or '0' for none
 
         Returns:
             list: a list of customers and contact details
@@ -407,11 +469,15 @@ def build_and_predict(file, data_template_path, fields, connect_ga):
     data = csv_to_list_from_bin_file(file, header=False)
     df = pd.DataFrame(data, columns=field_names)
 
+    # Merge data from Google Analytics if selected
+    if ga_profile_id != '0' and ga_cred_file_location is not None:
+        df, fields = merge_google_analytics(df, fields, ga_profile_id, ga_cred_file_location)
+
     # Convert data columns to correct type and check all types are valid
     df = validate_types(df, fields)
 
     # Determine what features to remove (if String type or if too many nulls)
-    x, y = stripdown_features(df, fields)
+    x, y, fields = stripdown_features(df, fields)
 
     # Make sure we have a number of successes to be able to run model
     if len(y[y == 1]) / len(y) < MIN_SUCCESS_PROPORTION:

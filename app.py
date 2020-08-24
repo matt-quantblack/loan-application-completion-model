@@ -104,13 +104,13 @@ def api_model_build():
     # Validate the file is acceptable
     file, error = validate_upload_file(request.files, extensions=["csv"])
 
-    connect_ga = request.form.get("connect_ga")
+    ga_profile_id = request.form.get("connect_ga")
     fields_string = request.form.get("fields")
     fields = json.loads(fields_string)
 
     #get a dataframe of the contacts as a Pandas Dataframe
     try:
-        contacts = model_builder.build_and_predict(file, DATA_TEMPLATE_PATH, fields, connect_ga)
+        contacts = model_builder.build_and_predict(file, DATA_TEMPLATE_PATH, fields, ga_profile_id, GA_CRED_PATH)
     except ValueError as err:
         return jsonify({'success': False, 'error': str(err)})
 
@@ -123,6 +123,7 @@ def api_model_build():
     }
     # Jsonify the response
     return jsonify(json_data)
+
 
 @app.route('/api/v1/model/export_to_excel', methods=['POST'])
 def export_to_excel():

@@ -217,7 +217,7 @@ def test_stripdown_splits_x_variables():
     fields = [["Some Feature", "Numeric"], ["Answer", "Response Variable"]]
 
     # Act
-    x, y = model_builder.stripdown_features(df, fields)
+    x, y, fields = model_builder.stripdown_features(df, fields)
 
     # Assert
     assert_frame_equal(x, x_expect)
@@ -226,13 +226,28 @@ def test_stripdown_splits_response_variable_works():
 
     # Arrange
     df = pd.DataFrame()
-    y_expect = pd.Series([1, 2, 3], name="Answer")
+    y_expect = pd.Series([1, 0, 0], name="Answer")
     df["Some Feature"] = [3, 4, 5]
     df["Answer"] = y_expect
     fields = [["Some Feature", "Numeric"], ["Answer", "Response Variable"]]
 
     # Act
-    x, y = model_builder.stripdown_features(df, fields)
+    x, y, fields = model_builder.stripdown_features(df, fields)
+
+    # Assert
+    assert_series_equal(y, y_expect)
+
+def test_stripdown_splits_response_variable_works_if_scale_of_0_to_100():
+
+    # Arrange
+    df = pd.DataFrame()
+    y_expect = pd.Series([0, 0, 1], dtype="int32")
+    df["Some Feature"] = [3, 4, 5]
+    df["Answer"] = [50, 70, 100]
+    fields = [["Some Feature", "Numeric"], ["Answer", "Response Variable"]]
+
+    # Act
+    x, y, fields = model_builder.stripdown_features(df, fields)
 
     # Assert
     assert_series_equal(y, y_expect)
@@ -252,7 +267,7 @@ def test_stripdown_removes_contact_details():
               ["Contacts1", "Contact Details"], ["Contacts2", "Contact Details"]]
 
     # Act
-    x, y = model_builder.stripdown_features(df, fields)
+    x, y, fields = model_builder.stripdown_features(df, fields)
 
     # Assert
     assert_frame_equal(x, x_expect)
@@ -271,7 +286,7 @@ def test_stripdown_removes_string_fields():
               ["Postcodes", "String"]]
 
     # Act
-    x, y = model_builder.stripdown_features(df, fields)
+    x, y, fields = model_builder.stripdown_features(df, fields)
 
     # Assert
     assert_frame_equal(x, x_expect)
@@ -290,7 +305,7 @@ def test_stripdown_removes_columns_with_many_nulls_fields():
               ["A lot of Nulls", "Numeric"]]
 
     # Act
-    x, y = model_builder.stripdown_features(df, fields)
+    x, y, fields = model_builder.stripdown_features(df, fields)
 
     # Assert
     assert_frame_equal(x, x_expect)
@@ -310,7 +325,7 @@ def test_stripdown_doesnt_remove_columns_with_some_nulls():
               ["A lot of Nulls", "Numeric"]]
 
     # Act
-    x, y = model_builder.stripdown_features(df, fields)
+    x, y, fields = model_builder.stripdown_features(df, fields)
 
     # Assert
     assert_frame_equal(x, x_expect)

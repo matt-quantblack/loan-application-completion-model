@@ -239,14 +239,6 @@ function render_data_fields(data) {
 /////////////////////////////////////////////////////
 
 /**
- * Renders loading div to show model is being built
- */
-function render_build_model_state() {
-    $("#build-model-loader").show();
-}
-
-
-/**
  * Renders DOM after successful building of model - showing list of priority customers in a table
  * @param  {JSON} data The response data
  */
@@ -282,6 +274,10 @@ function render_build_model_success(data) {
         // Create a row for each customer and render all details
         let markup = "<tr>";
         fields.forEach(function(field) {
+            // If value is a number round to 2 decimal places by default
+            if(!isNaN(parseFloat(obj[field])) && isFinite(obj[field]))
+                obj[field] = (Math.round(obj[field] * 100) / 100).toFixed(2);
+            // Add the cell contents to the markup
             markup += "<td>" + obj[field] + "</td>";
         });
         markup += "</tr>";
@@ -310,20 +306,4 @@ function render_build_model_failed() {
     // Hide the loading div
     $("#results-loader-card").hide();
     $("#build-button").prop('disabled', false);
-}
-
-
-/**
- * Simple alert success
- */
-function render_excel_file_success() {
-    alert("Done");
-}
-
-
-/**
- * Simple alert error
- */
-function render_excel_file_failed() {
-    alert("Failed");
 }
