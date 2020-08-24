@@ -4,8 +4,8 @@ This application takes a list of loan application data and produces a ranked lis
 who did not complete a loan application, that are more likely to complete the loan application on follow up.
 
 
-This is achieved by analysing the supplied data, building clustering, logistic regression and random forest machine 
-learning models in an automated process and then predicting the best customers to chase to complete their application.
+This is achieved by building clustering, logistic regression and random forest machine 
+learning models in an automated process to model and predict the best customers to chase to complete their application.
 
 
 This is a stand alone application that uses Flask as a web browser based GUI to the python backend. 
